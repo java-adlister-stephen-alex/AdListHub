@@ -18,4 +18,11 @@ public class Ad {
         this.title = title;
         this.description = description;
     }
+
+    public Ad(long userId, String title, String description, int price) {
+        this.userId = userId;
+        this.title = title;
+        this.description = description;
+        this.price = price;
+    }
 }
