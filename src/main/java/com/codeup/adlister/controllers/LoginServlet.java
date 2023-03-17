@@ -20,6 +20,10 @@ import java.io.IOException;
 @WebServlet(name = "controllers.LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        if the username currently in does not match the sticky, then remove the attribute
+        String stickyFromRegister = (String) request.getSession().getAttribute("stickyUsernameRegister");
+        request.getSession().setAttribute("stickyFromRegister", stickyFromRegister);
+
         if (request.getSession().getAttribute("user") != null) {
             response.sendRedirect("/profile");
             return;
@@ -28,12 +32,16 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        request.getSession().removeAttribute("stickyFromRegister");
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
         boolean passwordsMatch = false;
 
         User user = DaoFactory.getUsersDao().findByUsername(username);
+
+        request.getSession().setAttribute("stickyUsernameLogin", username);
 
         if (user == null) {
             response.sendRedirect("/login");
