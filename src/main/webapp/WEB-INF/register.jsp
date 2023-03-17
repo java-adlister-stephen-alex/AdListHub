@@ -12,11 +12,11 @@
     <form action="/register" method="POST">
         <div class="form-group">
             <label for="username">Username</label>
-            <input id="username" name="username" class="form-control" type="text" required>
+            <input id="username" name="username" class="form-control" type="text" value="${sessionScope.stickyUsernameRegister}" required>
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input id="email" name="email" class="form-control" type="text" required>
+            <input id="email" name="email" class="form-control" type="text" value="${sessionScope.stickyEmailRegister}" required>
         </div>
         <div class="form-group">
             <label for="password">Password</label>

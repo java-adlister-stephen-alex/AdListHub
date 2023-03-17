@@ -35,6 +35,9 @@ public class RegisterServlet extends HttpServlet {
         User emailUnique = DaoFactory.getUsersDao().findByEmail(email);
         boolean invalidInput = username.isEmpty() || email.isEmpty() || password.isEmpty() || (!password.equals(confirmPassword)) || nameUnique != null || emailUnique != null;
 
+        request.getSession().setAttribute("stickyUsernameRegister", username);
+        request.getSession().setAttribute("stickyEmail", email);
+
         if(invalidInput) {
             response.sendRedirect("/register");
             return;
