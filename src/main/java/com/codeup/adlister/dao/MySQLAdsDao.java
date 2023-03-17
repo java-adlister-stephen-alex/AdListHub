@@ -46,7 +46,7 @@ public class MySQLAdsDao implements Ads {
             statement.setLong(1, ad.getUserId());
             statement.setString(2, ad.getTitle());
             statement.setString(3, ad.getDescription());
-            statement.setInt(4, ad.getPrice());
+            statement.setLong(4, ad.getPrice());
 
             statement.executeUpdate();
             ResultSet rs = statement.getGeneratedKeys();
@@ -63,7 +63,7 @@ public class MySQLAdsDao implements Ads {
             rs.getLong("user_id"),
             rs.getString("title"),
             rs.getString("description"),
-            rs.getInt("price")
+            rs.getLong("price")
         );
     }
 

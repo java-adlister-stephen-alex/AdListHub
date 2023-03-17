@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label for="price">Price</label>
-                <input id="price" name="Price" class="form-control" type="text"></input>
+                <input id="price" name="price" class="form-control" type="text"></input>
             </div>
             <input type="submit" class="btn btn-block btn-primary">
         </form>
