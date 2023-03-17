@@ -3,9 +3,6 @@ package com.codeup.adlister.dao;
 import com.codeup.adlister.models.Ad;
 import com.mysql.cj.jdbc.Driver;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +36,20 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
+    public List<Ad> findByTitle(String title) {
+        System.out.println(title);
+        String findQry = "SELECT * FROM ads WHERE title LIKE ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(findQry);
+            statement.setString(1,  "%" + title + "%");
+            ResultSet rs = statement.executeQuery();
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error at findByTitle method in MySQLAdsDao", e.getCause());
+        }
+    }
+
+    @Override
     public Long insert(Ad ad) {
         try {
             String insertQry = "INSERT INTO ads(user_id, title, description, price) VALUES (?, ?, ?, ?)";
@@ -58,6 +69,7 @@ public class MySQLAdsDao implements Ads {
     }
 
     private Ad extractAd(ResultSet rs) throws SQLException {
+        System.out.println("in extraction");
         return new Ad(
             rs.getLong("id"),
             rs.getLong("user_id"),
