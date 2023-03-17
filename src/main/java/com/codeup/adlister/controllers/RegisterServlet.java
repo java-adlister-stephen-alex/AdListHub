@@ -25,12 +25,15 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
 
-        if(!password.equals(confirmPassword)) {
-            response.sendRedirect("/register");
-            return;
-        }
+//        if(!password.equals(confirmPassword)) {
+//            response.sendRedirect("/register");
+//            return;
+//        }
 
-        boolean invalidInput = username.isEmpty() || email.isEmpty() || password.isEmpty();
+        //checks to see if the username/email already exists
+        User nameUnique = DaoFactory.getUsersDao().findByUsername(username);
+        User emailUnique = DaoFactory.getUsersDao().findByEmail(email);
+        boolean invalidInput = username.isEmpty() || email.isEmpty() || password.isEmpty() || (!password.equals(confirmPassword)) || nameUnique != null || emailUnique != null;
 
         if(invalidInput) {
             response.sendRedirect("/register");
