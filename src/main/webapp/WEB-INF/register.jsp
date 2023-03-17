@@ -12,23 +12,23 @@
     <form action="/register" method="POST">
         <div class="form-group">
             <label for="username">Username</label>
-            <input id="username" name="username" class="form-control" type="text">
+            <input id="username" name="username" class="form-control" type="text" required>
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input id="email" name="email" class="form-control" type="text">
+            <input id="email" name="email" class="form-control" type="text" required>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
             <div class="d-flex">
-                <input id="password" name="password" class="form-control">
+                <input id="password" name="password" class="form-control" required>
                 <i class="bi bi-eye-slash fs-1 mx-2"></i>
             </div>
         </div>
         <div class="form-group">
             <label for="confirmPassword">Confirm Password</label>
             <div class="d-flex">
-                <input id="confirmPassword" name="confirmPassword" class="form-control">
+                <input id="confirmPassword" name="confirmPassword" class="form-control" required>
                 <i class="bi bi-eye-slash fs-1 mx-2"></i>
             </div>
         </div>

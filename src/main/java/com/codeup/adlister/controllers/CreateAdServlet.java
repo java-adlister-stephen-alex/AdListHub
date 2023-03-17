@@ -24,9 +24,19 @@ public class CreateAdServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String price = request.getParameter("price");
-        long priceLong = Long.parseLong(price);
-        request.setAttribute("price", priceLong);
+        long priceLong;
 
+        //tries to parse the parameter and if it does not parse, redirect to create page again (we will brush this up later).
+        try {
+            priceLong = Long.parseLong(price);
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + " Error parsing long");
+            response.sendRedirect("/ads/create");
+            return;
+        }
+
+
+        request.setAttribute("price", priceLong);
         User user = (User) request.getSession().getAttribute("user");
 
         if (user == null) {

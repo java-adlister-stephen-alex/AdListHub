@@ -28,10 +28,21 @@ public class MySQLUsersDao implements Users {
             PreparedStatement statement = connection.prepareStatement(findQry);
             statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
-            User user = extractUser(rs);
-            return user;
+            return extractUser(rs);
         } catch (SQLException e) {
             throw new RuntimeException("Error at findByUsername method in UsersDao", e);
+        }
+    }
+
+    public User findByEmail(String email) {
+        String findQry = "SELECT * FROM users WHERE email = ? LIMIT 1";
+        try {
+            PreparedStatement statement = connection.prepareStatement(findQry);
+            statement.setString(1, email);
+            ResultSet rs = statement.executeQuery();
+            return extractUser(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error at findByEmail method in UsersDao", e);
         }
     }
 

@@ -9,17 +9,17 @@
             <c:choose>
                 <c:when test="${sessionScope.user == null}">
                     <div class="d-flex justify-content-evenly">
-                        <div class="mx-4"><a href="/login">Login</a></div>
-                        <div class="mx-4"><a href="/register">Register For Our Site</a></div>
-                        <div class="mx-4"><a href="/ads">View Ads</a></div>
+                        <div class="mx-3"><a href="/login">Login</a></div>
+                        <div class="mx-3"><a href="/register">Register For Our Site</a></div>
+                        <div class="mx-3"><a href="/ads">View Ads</a></div>
                     </div>
                 </c:when>
                 <c:otherwise>
                     <div class="d-flex justify-content-evenly">
-                        <div class="mx-4"><a href="/profile">Profile</a></div>
-                        <div class="mx-4"><a href="/ads">View Ads</a></div>
-                        <div class="mx-4"><a href="/ads/create">Create An Ad</a></div>
-                        <div class="mx-4"><a href="/logout">Logout</a></div>
+                        <div class="mx-3"><a href="/profile">Profile</a></div>
+                        <div class="mx-3"><a href="/ads">View Ads</a></div>
+                        <div class="mx-3"><a href="/ads/create">Create An Ad</a></div>
+                        <div class="mx-3"><a href="/logout">Logout</a></div>
                     </div>
                 </c:otherwise>
 

@@ -12,15 +12,15 @@
         <form action="/ads/create" method="post">
             <div class="form-group">
                 <label for="title">Title</label>
-                <input id="title" name="title" class="form-control" type="text">
+                <input id="title" name="title" class="form-control" type="text" required>
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea id="description" name="description" class="form-control" type="text"></textarea>
+                <textarea id="description" name="description" class="form-control" type="text" required></textarea>
             </div>
             <div class="form-group">
                 <label for="price">Price</label>
-                <input id="price" name="price" class="form-control" type="text"></input>
+                <input id="price" name="price" class="form-control" type="text" required></input>
             </div>
             <input type="submit" class="btn btn-block btn-primary">
         </form>
