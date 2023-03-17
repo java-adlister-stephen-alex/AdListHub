@@ -18,6 +18,7 @@
                     <div class="d-flex justify-content-evenly">
                         <div class="mx-3"><a href="/profile">Profile</a></div>
                         <div class="mx-3"><a href="/ads">View Ads</a></div>
+                        <div class="mx-3"><a href="/ads/create">Create An Ad</a></div>
                         <div class="mx-3"><a href="/logout">Logout</a></div>
                     </div>
                 </c:otherwise>

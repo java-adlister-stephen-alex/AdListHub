@@ -12,9 +12,6 @@
     <div class="container">
         <h1>Welcome to your page, <c:out value="${sessionScope.user.username}"></c:out>!</h1>
     </div>
-    <div>
-        <div class="mx-3"><a href="/ads/create">Create An Ad</a></div>
-    </div>
 
 </body>
 </html>
