@@ -3,7 +3,7 @@
     <div class="container-fluid bg-light">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-brand fs-1" href="/ads">Adlister</a>
+            <a class="navbar-brand fs-1" href="${pageContext.request.contextPath}/ads">Adlister</a>
         </div>
         <div class="nav">
             <c:choose>

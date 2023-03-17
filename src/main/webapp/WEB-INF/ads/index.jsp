@@ -11,6 +11,13 @@
 
 <div class="container">
     <h1>Here Are all the ads!</h1>
+    <form action="${pageContext.request.contextPath}/ads/search" method="POST">
+        <div class="form-group">
+            <label for="search">Search Ad</label>
+            <input id="search" name="search" class="form-control" type="text" placeholder="name" required>
+            <input type="submit" class="btn btn-primary btn-block my-3" name="submit-search" value="search">
+        </div>
+    </form>
 
     <c:forEach var="ad" items="${ads}">
         <div class="col-md-6 my-5">
@@ -20,6 +27,6 @@
         </div>
     </c:forEach>
 </div>
-
+<jsp:include page="/WEB-INF/partials/scripts.jsp"/>
 </body>
 </html>

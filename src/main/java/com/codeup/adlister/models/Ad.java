@@ -5,7 +5,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
+@ToString
 public class Ad {
     private long id;
     private long userId;
