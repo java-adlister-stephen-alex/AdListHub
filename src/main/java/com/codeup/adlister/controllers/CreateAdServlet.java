@@ -24,6 +24,7 @@ public class CreateAdServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String price = request.getParameter("price");
+
         long priceLong = Long.parseLong(price);
         request.setAttribute("price", priceLong);
 
