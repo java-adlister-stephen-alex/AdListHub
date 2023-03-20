@@ -1,6 +1,8 @@
 package com.codeup.adlister.models;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -12,6 +14,7 @@ public class Ad {
     private String title;
     private String description;
     private Long price;
+    private List<String> adCategories;
 
     public Ad(long userId, String title, String description) {
         this.userId = userId;
