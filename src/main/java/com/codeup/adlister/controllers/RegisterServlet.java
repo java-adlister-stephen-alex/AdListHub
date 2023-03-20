@@ -39,6 +39,7 @@ public class RegisterServlet extends HttpServlet {
         request.getSession().setAttribute("stickyEmail", email);
 
         if(invalidInput) {
+            request.getSession().setAttribute("usernameEmailExists", true);
             response.sendRedirect("/register");
             return;
         }
