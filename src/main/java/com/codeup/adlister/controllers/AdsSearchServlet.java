@@ -37,8 +37,12 @@ public class AdsSearchServlet extends HttpServlet {
             response.sendRedirect("/ads");
             return;
         }
+
+        request.getSession().setAttribute("search", search);
+
         System.out.println("Ad found  " + ads);
         request.setAttribute("ads", ads);
         request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
+
     }
 }
