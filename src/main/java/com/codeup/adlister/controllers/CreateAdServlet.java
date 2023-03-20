@@ -19,6 +19,7 @@ public class CreateAdServlet extends HttpServlet {
             response.sendRedirect("/login");
             return;
         }
+        System.out.println(request.getSession().getAttribute("priceValidation"));
         request.getRequestDispatcher("/WEB-INF/ads/create.jsp")
             .forward(request, response);
     }
@@ -32,6 +33,7 @@ public class CreateAdServlet extends HttpServlet {
             priceLong = Long.parseLong(price);
         } catch (Exception e) {
             System.out.println(e.getMessage() + " Error parsing long");
+            request.getSession().setAttribute("priceValidation", true);
             response.sendRedirect("/ads/create");
             return;
         }

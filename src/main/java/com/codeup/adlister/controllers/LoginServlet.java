@@ -20,7 +20,6 @@ import java.io.IOException;
 @WebServlet(name = "controllers.LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        if the username currently in does not match the sticky, then remove the attribute
         String stickyFromRegister = (String) request.getSession().getAttribute("stickyUsernameRegister");
 
         if(request.getSession().getAttribute("stickyUsernameRegister") == stickyFromRegister) {
@@ -40,35 +39,31 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.getSession().removeAttribute("stickyUsernameRegister");
 
-        boolean redirectFromCreate = (boolean) request.getSession().getAttribute("intendedRedirectCreateAd");
-
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-
-        boolean passwordsMatch = false;
 
         User user = DaoFactory.getUsersDao().findByUsername(username);
 
         request.getSession().setAttribute("stickyUsernameRegister", username);
 
         if (user == null) {
+            request.getSession().setAttribute("userDNE", true);
             response.sendRedirect("/login");
             return;
         }
 
         if (Password.check(password, user.getPassword())) {
-            passwordsMatch = true;
             request.getSession().setAttribute("user", user);
             request.getSession().setAttribute("userId", user.getId());
-
-            if(redirectFromCreate == true) {
+            if(request.getSession().getAttribute("intendedRedirectCreateAd") != null) {
                 request.getSession().removeAttribute("intendedRedirectCreateAd");
                 response.sendRedirect("/ads/create");
                 return;
             }
-
             response.sendRedirect("/profile");
-        } else {
+            } else {
+            request.getSession().removeAttribute("userDNE");
+            request.getSession().setAttribute("passwordIncorrect", true);
             response.sendRedirect("/login");
         }
     }

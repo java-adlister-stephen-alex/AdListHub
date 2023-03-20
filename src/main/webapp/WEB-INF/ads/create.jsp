@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <jsp:include page="/WEB-INF/partials/head.jsp">
@@ -21,6 +22,11 @@
             <div class="form-group">
                 <label for="price">Price</label>
                 <input id="price" name="price" class="form-control" type="text" required></input>
+                <c:choose>
+                    <c:when test="${sessionScope.priceValidation != null}">
+                        <div>Invalid price</div>
+                    </c:when>
+                </c:choose>
             </div>
             <input type="submit" class="btn btn-block btn-primary">
         </form>
