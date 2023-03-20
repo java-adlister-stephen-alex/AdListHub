@@ -29,7 +29,7 @@ public class AdsSearchServlet extends HttpServlet {
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String search = request.getParameter("search");
-        List<Ad> ads = new ArrayList<>();
+        List<Ad> ads;
         ads = DaoFactory.getAdsDao().findByTitle(search);
         if (ads == null){
             System.out.println("No matches found");

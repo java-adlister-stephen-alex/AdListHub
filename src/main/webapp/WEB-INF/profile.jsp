@@ -13,7 +13,7 @@
         <h1>Welcome to your page, <c:out value="${sessionScope.user.username}"></c:out>!</h1>
     </div>
     <c:forEach var="ad" items="${ads}">
-        <div class="col-md-6 my-5">
+        <div class="col-md-3 my-5">
             <h2><c:out value="${ad.title}"></c:out></h2>
             <div><c:out value="${ad.description}"></c:out></div>
             <div>Price: $<c:out value="${ad.price}"></c:out>USD</div>
