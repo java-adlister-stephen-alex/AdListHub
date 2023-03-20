@@ -27,6 +27,8 @@ public class LoginServlet extends HttpServlet {
             request.getSession().setAttribute("stickyFromRegister", stickyFromRegister);
         }
 
+        //use this for the jsp if they were trying to access the profile page and let the user know that they have to login first.
+        String intendedProfileRedirect = (String) request.getSession().getAttribute("intendedRedirectFromProfile");
         if (request.getSession().getAttribute("user") != null) {
             response.sendRedirect("/profile");
             return;
@@ -37,6 +39,8 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.getSession().removeAttribute("stickyUsernameRegister");
+
+        boolean redirectFromCreate = (boolean) request.getSession().getAttribute("intendedRedirectCreateAd");
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -52,14 +56,17 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
-//        checking the hash
-        boolean hashOk = Password.check(password, Password.hash(password));
-        System.out.println("Hash ok?: " + hashOk);
-
         if (Password.check(password, user.getPassword())) {
             passwordsMatch = true;
             request.getSession().setAttribute("user", user);
             request.getSession().setAttribute("userId", user.getId());
+
+            if(redirectFromCreate == true) {
+                request.getSession().removeAttribute("intendedRedirectCreateAd");
+                response.sendRedirect("/ads/create");
+                return;
+            }
+
             response.sendRedirect("/profile");
         } else {
             response.sendRedirect("/login");

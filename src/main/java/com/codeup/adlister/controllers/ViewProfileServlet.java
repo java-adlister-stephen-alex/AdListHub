@@ -17,6 +17,7 @@ import java.util.List;
 public class ViewProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getSession().getAttribute("user") == null) {
+            request.getSession().setAttribute("intendedRedirectFromProfile", true);
             response.sendRedirect("/login");
             return;
         }
