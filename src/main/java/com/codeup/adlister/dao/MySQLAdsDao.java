@@ -50,6 +50,20 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
+    public List<Ad> findById(String id) {
+        System.out.println(id);
+        String findQry = "SELECT * FROM ads WHERE id = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(findQry);
+            statement.setString(1,  id);
+            ResultSet rs = statement.executeQuery();
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error at findByTitle method in MySQLAdsDao", e.getCause());
+        }
+    }
+
+    @Override
     public Long insert(Ad ad) {
         try {
             String insertQry = "INSERT INTO ads(user_id, title, description, price) VALUES (?, ?, ?, ?)";
