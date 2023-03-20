@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <jsp:include page="/WEB-INF/partials/head.jsp">
@@ -33,6 +34,11 @@
             </div>
         </div>
         <input type="submit" class="btn btn-block btn-primary my-4">
+        <c:choose>
+            <c:when test="${sessionScope.usernameEmailExists != null}">
+                <div>Username/Email already exists!</div>
+            </c:when>
+        </c:choose>
     </form>
 </div>
 
