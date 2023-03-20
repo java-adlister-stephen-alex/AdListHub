@@ -5,6 +5,8 @@ import com.codeup.adlister.models.Ad;
 import java.util.List;
 
 public interface Ads {
+    void deleteById(String id);
+
     // get a list of all the ads
     List<Ad> all();
 
