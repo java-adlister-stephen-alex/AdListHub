@@ -14,7 +14,7 @@
     <form action="${pageContext.request.contextPath}/ads/search" method="POST">
         <div class="form-group">
             <label for="search">Search Ad</label>
-            <input id="search" name="search" class="form-control" type="text" placeholder="name" required>
+            <input id="search" name="search" class="form-control" type="text" placeholder="name" value="${sessionScope.search}" required>
             <input type="submit" class="btn btn-primary btn-block my-3" name="submit-search" value="search">
         </div>
     </form>

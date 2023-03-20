@@ -22,17 +22,21 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        if the username currently in does not match the sticky, then remove the attribute
         String stickyFromRegister = (String) request.getSession().getAttribute("stickyUsernameRegister");
-        request.getSession().setAttribute("stickyFromRegister", stickyFromRegister);
+
+        if(request.getSession().getAttribute("stickyUsernameRegister") == stickyFromRegister) {
+            request.getSession().setAttribute("stickyFromRegister", stickyFromRegister);
+        }
 
         if (request.getSession().getAttribute("user") != null) {
             response.sendRedirect("/profile");
             return;
         }
+
         request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        request.getSession().removeAttribute("stickyFromRegister");
+        request.getSession().removeAttribute("stickyUsernameRegister");
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -41,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 
         User user = DaoFactory.getUsersDao().findByUsername(username);
 
-        request.getSession().setAttribute("stickyUsernameLogin", username);
+        request.getSession().setAttribute("stickyUsernameRegister", username);
 
         if (user == null) {
             response.sendRedirect("/login");
