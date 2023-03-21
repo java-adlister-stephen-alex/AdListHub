@@ -76,7 +76,10 @@ public class MySQLAdsDao implements Ads {
             statement.executeUpdate();
             ResultSet rs = statement.getGeneratedKeys();
             rs.next();
-            return rs.getLong(1);
+            Long adId = rs.getLong(1);
+            //loop through the CAtegory objects that go through the ad.getCategoris and use the Dao to insert an ad for each one of those
+
+            return adId;
         } catch (SQLException e) {
             throw new RuntimeException("Error creating a new ad.", e);
         }

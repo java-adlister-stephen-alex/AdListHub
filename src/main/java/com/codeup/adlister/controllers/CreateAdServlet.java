@@ -45,6 +45,9 @@ public class CreateAdServlet extends HttpServlet {
             return;
         }
 
+        //figure out how to get user selected categories into the Ad object
+        //ad object has list of all categories that need to be added to the Ad
+
         Ad ad = new Ad(
             user.getId(),
             request.getParameter("title"),
@@ -52,6 +55,7 @@ public class CreateAdServlet extends HttpServlet {
             priceLong
         );
         DaoFactory.getAdsDao().insert(ad);
+//        DaoFactory.getCategoriesAdsDao().insert(ad)
         response.sendRedirect("/ads");
     }
 }
