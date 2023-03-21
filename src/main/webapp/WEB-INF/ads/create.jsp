@@ -32,8 +32,8 @@
             <div>Categories</div>
             <c:forEach items="${sessionScope.categories}" var="category">
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="categories" value="${category.category}">
-                    <label class="form-check-label">${category}</label>
+                    <input class="form-check-input" type="checkbox" id="${category}" name="categories" value="${category.category}">
+                    <label class="form-check-label" for="${category}">${category}</label>
                 </div>
             </c:forEach>
         </div>

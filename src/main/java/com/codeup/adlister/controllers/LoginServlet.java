@@ -60,7 +60,7 @@ public class LoginServlet extends HttpServlet {
 
             List<Category> allCategories = DaoFactory.getCategoriesDao().all();
             request.getSession().setAttribute("categories", allCategories);
-            System.out.println(allCategories.toString());
+//            System.out.println(allCategories.toString());
 
             if(request.getSession().getAttribute("intendedRedirectCreateAd") != null) {
                 request.getSession().removeAttribute("intendedRedirectCreateAd");

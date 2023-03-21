@@ -64,11 +64,4 @@ public class MySQLCategoriesDao implements Categories {
         }
     }
 
-    public String getCategory(Ad ad) {
-        return null;
-    }
-
-//    public long getIdByCategory(String category) {
-//        return null;
-//    }
 }
