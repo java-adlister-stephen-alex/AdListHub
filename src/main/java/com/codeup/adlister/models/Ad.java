@@ -28,4 +28,12 @@ public class Ad {
         this.description = description;
         this.price = price;
     }
+
+    public Ad(long userId, String title, String description, Long price, List<String> adCategories) {
+        this.userId = userId;
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.adCategories = adCategories;
+    }
 }

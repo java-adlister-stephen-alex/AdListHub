@@ -1,7 +1,6 @@
 package com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.Ad;
-import com.codeup.adlister.models.Category;
 import com.mysql.cj.jdbc.Driver;
 
 import java.sql.*;
@@ -84,25 +83,26 @@ public class MySQLAdsDao implements Ads {
     }
 
     private List<String> getCategoriesForAd(long id) {
-        String findQry = "Select c.category" +
-                "FROM ads a" +
-                "JOIN category_ad ca on a.id = ca.ad_id" +
-                "JOIN categories c on c.id = ca.category_id" +
-                "WHERE a.id = ?;";
+        String findQry = "SELECT c.category" +
+                " FROM ads a " +
+                " JOIN category_ad ca ON a.id = ca.ad_id " +
+                " JOIN categories c ON c.id = ca.category_id " +
+                " WHERE a.id = ?;";
         try {
             PreparedStatement statement = connection.prepareStatement(findQry);
             statement.setLong(1, id);
             ResultSet rs = statement.executeQuery();
             return createCategoryListFromResults(rs);
         } catch (SQLException e) {
-            throw new RuntimeException("Error at getCategoriesForAd method in MySQLAdsDao", e.getCause());
+            e.printStackTrace();
+            return null;
         }
     }
 
     private List<Ad> getAdsByCategory(String category) {
-        String findQry = "SELECT * FROM ads" +
-                "join category_ad on ads.id = category_ad.ad_id" +
-                "join categories on category_id = categories.id" +
+        String findQry = " SELECT * FROM ads " +
+                " JOIN category_ad ON ads.id = category_ad.ad_id " +
+                " JOIN categories ON category_id = categories.id " +
                 " WHERE categories.category = ?;";
         try {
             PreparedStatement statement = connection.prepareStatement(findQry);
@@ -110,7 +110,8 @@ public class MySQLAdsDao implements Ads {
             ResultSet rs = statement.executeQuery();
             return createAdsFromResults(rs);
         } catch (SQLException e) {
-            throw new RuntimeException("Error at getAdsByCategory method in MySQLAdsDao", e.getCause());
+            e.printStackTrace();
+            return null;
         }
     }
 

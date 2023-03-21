@@ -4,6 +4,7 @@ import com.codeup.adlister.dao.Ads;
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.dao.MySQLAdsDao;
 import com.codeup.adlister.dao.Users;
+import com.codeup.adlister.models.Category;
 import com.codeup.adlister.models.User;
 import org.mindrot.jbcrypt.BCrypt;
 import util.Password;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.DataOutput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "controllers.LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
@@ -55,6 +57,11 @@ public class LoginServlet extends HttpServlet {
         if (Password.check(password, user.getPassword())) {
             request.getSession().setAttribute("user", user);
             request.getSession().setAttribute("userId", user.getId());
+
+            List<Category> allCategories = DaoFactory.getCategoriesDao().all();
+            request.getSession().setAttribute("categories", allCategories);
+            System.out.println(allCategories.toString());
+
             if(request.getSession().getAttribute("intendedRedirectCreateAd") != null) {
                 request.getSession().removeAttribute("intendedRedirectCreateAd");
                 response.sendRedirect("/ads/create");
