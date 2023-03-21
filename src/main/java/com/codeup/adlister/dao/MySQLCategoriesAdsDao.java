@@ -47,7 +47,7 @@ public class MySQLCategoriesAdsDao implements CategoriesAds{
             rs.next();
             return rs.getLong(1);
         } catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new RuntimeException(e.getMessage() + "insert method error SQLCategoriesAdsDao");
         }
     }
 
