@@ -2,6 +2,7 @@ package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.Category;
 import com.codeup.adlister.models.User;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "controllers.CreateAdServlet", urlPatterns = "/ads/create")
 public class CreateAdServlet extends HttpServlet {
@@ -19,7 +21,6 @@ public class CreateAdServlet extends HttpServlet {
             response.sendRedirect("/login");
             return;
         }
-        System.out.println(request.getSession().getAttribute("priceValidation"));
         request.getRequestDispatcher("/WEB-INF/ads/create.jsp")
             .forward(request, response);
     }
@@ -27,8 +28,6 @@ public class CreateAdServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String price = request.getParameter("price");
         long priceLong;
-
-        //tries to parse the parameter and if it does not parse, redirect to create page again (we will brush this up later).
         try {
             priceLong = Long.parseLong(price);
         } catch (Exception e) {
@@ -37,15 +36,17 @@ public class CreateAdServlet extends HttpServlet {
             response.sendRedirect("/ads/create");
             return;
         }
-
-
         request.setAttribute("price", priceLong);
+
         User user = (User) request.getSession().getAttribute("user");
 
         if (user == null) {
             response.sendRedirect("/login");
             return;
         }
+
+        //figure out how to get user selected categories into the Ad object
+        //ad object has list of all categories that need to be added to the Ad
 
         Ad ad = new Ad(
             user.getId(),
@@ -54,6 +55,7 @@ public class CreateAdServlet extends HttpServlet {
             priceLong
         );
         DaoFactory.getAdsDao().insert(ad);
+//        DaoFactory.getCategoriesAdsDao().insert(ad)
         response.sendRedirect("/ads");
     }
 }

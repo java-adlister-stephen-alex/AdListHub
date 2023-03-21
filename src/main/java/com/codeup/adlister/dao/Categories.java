@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface Categories {
     List<Category> all();
+
     Category findByCategory(String category);
-    String getCategory(Ad ad);
 }
