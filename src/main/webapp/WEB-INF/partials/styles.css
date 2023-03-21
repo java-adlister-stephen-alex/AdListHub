@@ -4,8 +4,8 @@ a {
 }
 #ad-card {
     text-decoration: none;
-}
-.card{
-    text-decoration: none;
     color: black;
+}
+.ad-card-title {
+    display: inline;
 }

@@ -22,7 +22,7 @@
 
     <div class="row row-cols-1 row-cols-md-2 g-4">
     <c:forEach var="ad" items="${ads}">
-        <a id="ad-card" href="/ads?ad_card=${ad.id}">
+        <a id="ad-card" href="/ads/card?ad_card=${ad.id}">
             <div style="height: 100px;" class="col">
                 <div class="card">
                     <img src="..." class="card-img-top" alt="...">
@@ -33,14 +33,8 @@
                 </div>
             </div>
         </a>
-<%--        <div class="col-md-6 my-5">--%>
-<%--            <h2><c:out value="${ad.title}"></c:out></h2>--%>
-<%--            <div><c:out value="${ad.description}"></c:out></div>--%>
-<%--            <div>Price: $<c:out value="${ad.price}"></c:out>USD</div>--%>
-<%--        </div>--%>
     </c:forEach>
     </div>
-
 </div>
 <jsp:include page="/WEB-INF/partials/scripts.jsp"/>
 </body>

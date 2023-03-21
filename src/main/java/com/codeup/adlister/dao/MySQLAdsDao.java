@@ -25,6 +25,33 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
+    public boolean patchById(String inputId, String title, String description, Long price) {
+        String qry = "UPDATE ads SET title = ?, description = ?, price = ? WHERE id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(qry);
+            stmt.setString(1,   title);
+            stmt.setString(2,   description);
+            stmt.setLong(3,   price);
+            stmt.setString(4,   inputId);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error editing ad at patchById", e);
+        }
+    }
+
+    @Override
+    public boolean deleteById(String id) {
+        String qry = "DELETE FROM ads WHERE id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(qry);
+            stmt.setString(1,   id);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting ad.", e);
+        }
+    }
+
+    @Override
     public List<Ad> all() {
         Statement stmt = null;
         try {
