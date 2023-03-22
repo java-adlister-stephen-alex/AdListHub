@@ -38,6 +38,16 @@
                             <textarea id="edit-description" name="edit-description"  disabled>
                                 ${ad.get(0).description}
                             </textarea>
+                            <c:choose>
+                                <c:when test="${adCategories.size() != 0}">
+                                    <div>
+                                        Categories:
+                                        <c:forEach var="category" items="${adCategories}">
+                                            <span>${category.category} </span>
+                                        </c:forEach>
+                                    </div>
+                                </c:when>
+                            </c:choose>
                         </div>
                     </div>
                     <c:choose>

@@ -14,7 +14,7 @@ public class Ad {
     private String title;
     private String description;
     private Long price;
-    private List<String> adCategories;
+    private List<Category> adCategories;
 
     public Ad(long userId, String title, String description) {
         this.userId = userId;
@@ -29,7 +29,7 @@ public class Ad {
         this.price = price;
     }
 
-    public Ad(long userId, String title, String description, Long price, List<String> adCategories) {
+    public Ad(long userId, String title, String description, Long price, List<Category> adCategories) {
         this.userId = userId;
         this.title = title;
         this.description = description;

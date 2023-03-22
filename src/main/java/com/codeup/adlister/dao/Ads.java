@@ -1,6 +1,7 @@
 package com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.Category;
 
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface Ads {
     Long insert(Ad ad);
 
     List<Ad> findById(String id);
+
+    List<Category> getCategoriesForAd(Long id);
 }

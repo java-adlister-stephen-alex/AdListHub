@@ -46,7 +46,11 @@ public class CreateAdServlet extends HttpServlet {
         }
 
         //figure out how to get user selected categories into the Ad object
+
         //ad object has list of all categories that need to be added to the Ad
+
+
+//        request.getSession().getAttribute("categories").all?
 
         Ad ad = new Ad(
             user.getId(),
