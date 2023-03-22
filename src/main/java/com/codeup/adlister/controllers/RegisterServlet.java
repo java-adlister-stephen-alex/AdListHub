@@ -25,12 +25,6 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
 
-//        if(!password.equals(confirmPassword)) {
-//            response.sendRedirect("/register");
-//            return;
-//        }
-
-        //checks to see if the username/email already exists
         User nameUnique = DaoFactory.getUsersDao().findByUsername(username);
         User emailUnique = DaoFactory.getUsersDao().findByEmail(email);
         boolean invalidInput = username.isEmpty() || email.isEmpty() || password.isEmpty() || (!password.equals(confirmPassword)) || nameUnique != null || emailUnique != null;
@@ -44,16 +38,11 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
 
-        //hash the password to insert into the user to then get inserted into the DB
         password = Password.hash(password);
-
         User user = new User(1, username, email, password);
         Users dao = DaoFactory.getUsersDao();
         dao.insert(user);
 
         response.sendRedirect("/login");
-
-        // TODO: if a user was successfully created, send them to their profile
-        //I sent them to the login page and then the login page will end up allowing them to log in with their new credentials and send them to their profile.
     }
 }

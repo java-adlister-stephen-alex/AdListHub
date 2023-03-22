@@ -60,6 +60,7 @@ public class LoginServlet extends HttpServlet {
             }
 
             response.sendRedirect("/profile");
+
             } else {
             request.getSession().removeAttribute("userDNE");
             request.getSession().setAttribute("passwordIncorrect", true);
