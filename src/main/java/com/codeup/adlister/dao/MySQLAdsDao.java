@@ -65,7 +65,6 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public List<Ad> findByTitle(String title) {
-        System.out.println(title);
         String findQry = "SELECT * FROM ads WHERE title LIKE ?";
         try {
             PreparedStatement statement = connection.prepareStatement(findQry);
@@ -79,7 +78,6 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public List<Ad> findById(String id) {
-        System.out.println(id);
         String findQry = "SELECT * FROM ads WHERE id = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(findQry);

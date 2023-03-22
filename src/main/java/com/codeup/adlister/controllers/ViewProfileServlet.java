@@ -24,7 +24,6 @@ public class ViewProfileServlet extends HttpServlet {
         }
 
         long userId = Long.parseLong(request.getSession().getAttribute("userId").toString());
-        System.out.println(userId);
         List<Ad> usersAds = new ArrayList<>();
         try{
             for (Ad ad : DaoFactory.getAdsDao().all()) {

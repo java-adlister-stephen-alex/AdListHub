@@ -33,7 +33,6 @@ public class AdsSearchServlet extends HttpServlet {
         ads = DaoFactory.getAdsDao().findByTitle(search);
 
         if (ads == null){
-            System.out.println("No matches found");
             request.setAttribute("ads", ads);
             response.sendRedirect("/ads");
             return;
