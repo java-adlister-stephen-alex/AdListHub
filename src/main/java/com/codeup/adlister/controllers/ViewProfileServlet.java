@@ -18,6 +18,7 @@ public class ViewProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getSession().getAttribute("user") == null) {
             request.getSession().setAttribute("intendedRedirectFromProfile", true);
+            request.getSession().removeAttribute("intendedRedirectCreateAd");
             response.sendRedirect("/login");
             return;
         }
@@ -36,8 +37,6 @@ public class ViewProfileServlet extends HttpServlet {
         }
 
         request.setAttribute("ads", usersAds);
-
-//        request.setAttribute("ads", DaoFactory.getAdsDao().all());
 
         request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
     }

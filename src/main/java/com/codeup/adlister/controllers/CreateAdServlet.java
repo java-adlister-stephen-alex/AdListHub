@@ -19,25 +19,34 @@ public class CreateAdServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getSession().getAttribute("user") == null) {
             request.getSession().setAttribute("intendedRedirectCreateAd", true);
+            request.getSession().removeAttribute("intendedRedirectFromProfile");
             response.sendRedirect("/login");
             return;
         }
+        request.getSession().getAttribute("createTitle");
+        request.getSession().getAttribute("createDescription");
         request.getRequestDispatcher("/WEB-INF/ads/create.jsp")
             .forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String price = request.getParameter("price");
+        String title = request.getParameter("title");
+        String description = request.getParameter("description");
         long priceLong;
         try {
             priceLong = Long.parseLong(price);
         } catch (Exception e) {
             System.out.println(e.getMessage() + " Error parsing long");
+            request.getSession().setAttribute("createTitle", title);
+            request.getSession().setAttribute("createDescription", description);
             request.getSession().setAttribute("priceValidation", true);
             response.sendRedirect("/ads/create");
             return;
         }
         request.setAttribute("price", priceLong);
+        request.getSession().removeAttribute("createTitle");
+        request.getSession().removeAttribute("createDescription");
 
         User user = (User) request.getSession().getAttribute("user");
 
@@ -45,10 +54,6 @@ public class CreateAdServlet extends HttpServlet {
             response.sendRedirect("/login");
             return;
         }
-
-        //figure out how to get user selected categories into the Ad object
-
-        //ad object has list of all categories that need to be added to the Ad
 
         List<Category> adCategories = new ArrayList<>();
         List<Category> allCategories = DaoFactory.getCategoriesDao().all();

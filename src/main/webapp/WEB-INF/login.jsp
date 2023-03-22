@@ -13,7 +13,7 @@
     <form action="/login" method="POST" novalidate>
         <div class="form-group">
             <label for="username">Username</label>
-            <input id="username" name="username" class="form-control" type="text" value="${sessionScope.stickyFromRegister}" required>
+            <input id="username" name="username" class="form-control" type="text" value="${sessionScope.stickyUsernameRegister}" required>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
