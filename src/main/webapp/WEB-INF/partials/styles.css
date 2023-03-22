@@ -38,9 +38,20 @@ nav.navbar {
 }
 
 a.right-nav {
-    color: #dbeaff;
+    box-shadow: inset 0 0 0 0 #dbeaff;
+    border-radius: 0.25em;
     font-size: 1em;
+    color: #dbeaff;
     text-decoration: none;
+    margin: 0 -.25rem;
+    padding: 0 .25rem;
+    transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+}
+
+a.right-nav:hover {
+    box-shadow: inset 300px 0 0 0 #dbeaff;
+    border-radius: 0.25em;
+    color: #4C4556;
 }
 
 .left-nav {
@@ -56,4 +67,42 @@ a.right-nav {
     box-shadow: inset 250px 0 0 0 #dbeaff;
     border-radius: 0.25em;
     color: #4C4556;
+}
+
+.all-pages-bg {
+    background-color: rgba(187, 195, 206, 0.77);
+}
+
+.login-container {
+    height: 100%;
+    width: 100%;
+}
+
+.login-container-sizing {
+    padding: 0 15em 20em 15em;
+}
+
+.submit-btn {
+    color: #4C4556;
+    background-color: #F6C026;
+    border: 2px solid #872642;
+}
+
+.submit-btn:hover {
+    border: 2px solid #872642;
+    background-color: #872642;
+}
+
+.profile-cards {
+    height: 20em;
+    width: 20em;
+}
+
+div.card {
+    border: 1px solid #872642;
+}
+
+div.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 10px 20px 2px rgba(0, 0, 0, 0.25);
 }

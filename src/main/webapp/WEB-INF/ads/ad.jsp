@@ -26,7 +26,6 @@
             <div class="d-flex justify-content-center align-items-center">
                 <form action="/ads/card?edit=true" method="post">
                     <div style="height: 600px; width: 800px" class="card ">
-                        <img src="..." class="card-img-top" alt="...">
                         <div class="card-body row">
                             <div class="card-title col">
                                 <label for="edit-title">Title: </label>

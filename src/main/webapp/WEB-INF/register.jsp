@@ -6,43 +6,46 @@
         <jsp:param name="title" value="Register For Our Website"/>
     </jsp:include>
 </head>
-<body>
+<body class="all-pages-bg">
 <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
-<div class="container">
-    <h1>Register for our website</h1>
-    <form action="/register" method="POST">
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input id="username" name="username" class="form-control" type="text" value="${sessionScope.stickyUsernameRegister}" required>
-        </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input id="email" name="email" class="form-control" type="text" value="${sessionScope.stickyEmailRegister}" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <div class="d-flex">
-                <input id="password" name="password" class="form-control" required>
-                <i class="bi bi-eye-slash fs-1 mx-2"></i>
+<div class="container d-flex login-container justify-content-center align-items-center">
+    <div class="container-fluid login-container-sizing">
+        <h1 class="text-center">Register for our website</h1>
+        <form action="/register" method="POST">
+            <div class="form-group my-2">
+                <label for="username">Username</label>
+                <input id="username" name="username" class="form-control" type="text"
+                       value="${sessionScope.stickyUsernameRegister}" required>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="confirmPassword">Confirm Password</label>
-            <div class="d-flex">
-                <input id="confirmPassword" name="confirmPassword" class="form-control" required>
-                <i class="bi bi-eye-slash fs-1 mx-2"></i>
+            <div class="form-group my-2">
+                <label for="email">Email</label>
+                <input id="email" name="email" class="form-control" type="text"
+                       value="${sessionScope.stickyEmailRegister}" required>
             </div>
-        </div>
-        <input type="submit" class="btn btn-block btn-primary my-4">
-        <c:choose>
-            <c:when test="${sessionScope.usernameEmailExists != null}">
-                <div>Username/Email already exists!</div>
-            </c:when>
-        </c:choose>
-    </form>
+            <div class="form-group my-2">
+                <label for="password">Password</label>
+                <div class="d-flex">
+                    <input id="password" name="password" class="form-control" required>
+                    <i class="bi bi-eye-slash fs-1 mx-2"></i>
+                </div>
+            </div>
+            <div class="form-group my-2">
+                <label for="confirmPassword">Confirm Password</label>
+                <div class="d-flex">
+                    <input id="confirmPassword" name="confirmPassword" class="form-control" required>
+                    <i class="bi bi-eye-slash fs-1 mx-2"></i>
+                </div>
+            </div>
+            <input type="submit" class="btn btn-block btn-primary my-2 submit-btn" value="Register">
+            <c:choose>
+                <c:when test="${sessionScope.usernameEmailExists != null}">
+                    <div>Username/Email already exists!</div>
+                </c:when>
+            </c:choose>
+        </form>
+    </div>
 </div>
-
-<%@include file="partials/toggle-pw.jsp"%>
-<%@include file="partials/scripts.jsp"%>
+    <%@include file="partials/toggle-pw.jsp" %>
+    <%@include file="partials/scripts.jsp" %>
 </body>
 </html>
