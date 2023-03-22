@@ -165,9 +165,9 @@ public class MySQLAdsDao implements Ads {
     }
 
     private List<Category> createCategoryListFromResults(ResultSet rs) throws SQLException {
-        System.out.println("In createCategoryListFromResults: " + rs);
         List<Category> categories = new ArrayList<>();
         while (rs.next()) {
+//            can also be extract category
             categories.add(new Category(
                     rs.getLong("Id"),
                     rs.getString("category")

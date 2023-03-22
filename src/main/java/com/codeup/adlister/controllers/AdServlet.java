@@ -32,14 +32,14 @@ public class AdServlet extends HttpServlet {
 //            request.getRequestDispatcher("/WEB-INF/ads/ad.jsp").forward(request, response);
 //            return;
 //        }
-//        if(request.getParameter("delete") != null){
-//            request.setAttribute("delete", true);
-//            request.getRequestDispatcher("/WEB-INF/ads/ad.jsp").forward(request, response);
-//            return;
-//        }
+        if(request.getParameter("delete") != null){
+            request.setAttribute("delete", true);
+            request.getRequestDispatcher("/WEB-INF/ads/ad.jsp").forward(request, response);
+            return;
+        }
         if(request.getParameter("deletefinal") != null){
             DaoFactory.getAdsDao().deleteById(request.getParameter("ad_card"));
-            request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
+            request.getRequestDispatcher("/profile").forward(request, response);
             return;
         }
         List<Category> categories;
@@ -57,8 +57,8 @@ public class AdServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/ads/ad.jsp").forward(request, response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String description = request.getParameter("edit-description").trim();
-        String price = request.getParameter("edit-price").trim();
+        String description = request.getParameter("edit-description");
+        String price = request.getParameter("edit-price");
         long priceLong;
         String id = (String)request.getSession().getAttribute("ad_id");
         try {
@@ -68,7 +68,7 @@ public class AdServlet extends HttpServlet {
             response.sendRedirect("/ads/card?ad_card=" + id);
             return;
         }
-        String title = (request.getParameter("edit-title")).trim();
+        String title = (request.getParameter("edit-title"));
         DaoFactory.getAdsDao().patchById(id, title, description, priceLong);
         request.getSession().removeAttribute("ad_id");
         response.sendRedirect("/ads/card?ad_card=" + id);

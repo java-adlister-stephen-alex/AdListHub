@@ -1,7 +1,6 @@
 package com.codeup.adlister.dao;
 import com.mysql.cj.jdbc.Driver;
 
-import com.codeup.adlister.models.Category;
 import com.codeup.adlister.models.CategoryAd;
 
 import java.sql.*;
@@ -35,7 +34,7 @@ public class MySQLCategoriesAdsDao implements CategoriesAds{
         }
     }
 
-    public Long insert(long adId, long categoryId) {
+    public void insert(long adId, long categoryId) {
         try {
             String insertQry = "INSERT INTO category_ad(ad_id, category_id) VALUES (?, ?)";
             PreparedStatement statement = connection.prepareStatement(insertQry, Statement.RETURN_GENERATED_KEYS);
@@ -43,9 +42,9 @@ public class MySQLCategoriesAdsDao implements CategoriesAds{
             statement.setLong(2, categoryId);
 
             statement.executeUpdate();
-            ResultSet rs = statement.getGeneratedKeys();
-            rs.next();
-            return rs.getLong(1);
+//            ResultSet rs = statement.getGeneratedKeys();
+//            rs.next();
+//            return rs.getLong(1);
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage() + "insert method error SQLCategoriesAdsDao");
         }
