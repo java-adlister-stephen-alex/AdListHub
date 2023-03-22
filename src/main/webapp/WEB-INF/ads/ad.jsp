@@ -26,25 +26,24 @@
             <div class="d-flex justify-content-center align-items-center">
                 <form action="/ads/card?edit=true" method="post">
                     <div style="height: 600px; width: 800px" class="card ">
-                        <div class="card-body row">
-                            <div class="card-title col">
+                        <div class="card-body p-3">
+                            <div class="card-title ">
                                 <label for="edit-title">Title: </label>
                                 <input id="edit-title" name="edit-title" type="text" value="${ad.get(0).title}" disabled>
                                 <label for="edit-price">Price: </label>
                                 <input id="edit-price" name="edit-price" type="text" value="${ad.get(0).price}" disabled>
                             </div>
                             <label for="edit-description">Description: </label>
-                            <textarea id="edit-description" name="edit-description"  disabled>
+                            <textarea  id="edit-description" name="edit-description"  disabled>
                                 ${ad.get(0).description}
                             </textarea>
                             <c:choose>
                                 <c:when test="${adCategories.size() != 0}">
-                                    <div>
-                                        Categories:
+                                    <ul>
                                         <c:forEach var="category" items="${adCategories}">
-                                            <span>${category.category} </span>
+                                            <li>${category.category} </li>
                                         </c:forEach>
-                                    </div>
+                                    </ul>
                                 </c:when>
                             </c:choose>
                         </div>

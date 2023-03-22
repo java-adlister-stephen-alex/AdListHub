@@ -82,6 +82,10 @@ a.right-nav:hover {
     padding: 0 15em 20em 15em;
 }
 
+.content-box{
+    background-color: #F6C026;
+}
+
 .submit-btn {
     color: #4C4556;
     background-color: #F6C026;
