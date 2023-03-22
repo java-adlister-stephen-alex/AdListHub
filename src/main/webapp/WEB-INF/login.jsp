@@ -6,7 +6,7 @@
         <jsp:param name="title" value="Please Log In"/>
     </jsp:include>
 </head>
-<body>
+<body class="">
 <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
 <div class="container">
     <h1>Please Log In</h1>

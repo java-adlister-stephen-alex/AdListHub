@@ -35,7 +35,7 @@
         </div>
         <div class="form-group">
             <label for="price">Price</label>
-            <input id="price" name="price" class="form-control" type="text" required></input>
+            <input id="price" name="price" class="form-control" type="text" required>
             <c:choose>
                 <c:when test="${sessionScope.priceValidation != null}">
                     <div>Invalid price</div>
