@@ -12,12 +12,12 @@
     <div class="container-fluid login-container-sizing">
         <h1 class="text-center">Please Log In</h1>
         <form action="/login" method="POST" novalidate>
-            <div class="form-group">
+            <div class="form-group my-2">
                 <label for="username">Username</label>
                 <input id="username" name="username" class="form-control" type="text"
                        value="${sessionScope.stickyUsernameRegister}" required>
             </div>
-            <div class="form-group">
+            <div class="form-group my-2">
                 <label for="password">Password</label>
                 <div class="d-flex">
                     <input id="password" name="password" class="form-control" required>
