@@ -1,8 +1,6 @@
 package com.codeup.adlister.dao;
 
-import com.codeup.adlister.models.Ad;
 import com.codeup.adlister.models.Category;
-import com.codeup.adlister.models.User;
 import com.mysql.cj.jdbc.Driver;
 
 import java.sql.*;
@@ -45,7 +43,8 @@ public class MySQLCategoriesDao implements Categories {
         return categories;
     }
 
-    private Category extractCategory(ResultSet rs) throws SQLException {
+    @Override
+    public Category extractCategory(ResultSet rs) throws SQLException {
         return new Category(
                 rs.getLong("id"),
                 rs.getString("category")

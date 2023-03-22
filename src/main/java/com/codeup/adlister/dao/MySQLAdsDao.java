@@ -1,6 +1,7 @@
 package com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.Category;
 import com.mysql.cj.jdbc.Driver;
 
 import java.sql.*;
@@ -43,7 +44,7 @@ public class MySQLAdsDao implements Ads {
         String qry = "DELETE FROM ads WHERE id = ?";
         try {
             PreparedStatement stmt = connection.prepareStatement(qry);
-            stmt.setString(1,   id);
+            stmt.setString(1, id);
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new RuntimeException("Error deleting ad.", e);
@@ -112,18 +113,36 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
-    private List<String> getCategoriesForAd(long id) {
-        String findQry = "SELECT c.category" +
+
+    private Ad extractAd(ResultSet rs) throws SQLException {
+        long adId = rs.getLong("id");
+
+        List<Category> adCategories = getCategoriesForAd(adId);
+
+        return new Ad(
+            adId,
+            rs.getLong("user_id"),
+            rs.getString("title"),
+            rs.getString("description"),
+            rs.getLong("price"),
+            adCategories
+        );
+    }
+
+    @Override
+    public List<Category> getCategoriesForAd(Long id) {
+        String findQry = "SELECT *" +
                 " FROM ads a " +
                 " JOIN category_ad ca ON a.id = ca.ad_id " +
                 " JOIN categories c ON c.id = ca.category_id " +
-                " WHERE a.id = ?;";
+                " WHERE a.id = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(findQry);
             statement.setLong(1, id);
             ResultSet rs = statement.executeQuery();
             return createCategoryListFromResults(rs);
         } catch (SQLException e) {
+            System.out.println("SQLException in getCategoriesForAd");
             e.printStackTrace();
             return null;
         }
@@ -145,25 +164,14 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
-    private Ad extractAd(ResultSet rs) throws SQLException {
-        long adId = rs.getLong("id");
-
-        List<String> adCategories = getCategoriesForAd(adId);
-
-        return new Ad(
-            adId,
-            rs.getLong("user_id"),
-            rs.getString("title"),
-            rs.getString("description"),
-            rs.getLong("price"),
-            adCategories
-        );
-    }
-
-    private List<String> createCategoryListFromResults(ResultSet rs) throws SQLException {
-        List<String> categories = new ArrayList<>();
+    private List<Category> createCategoryListFromResults(ResultSet rs) throws SQLException {
+        List<Category> categories = new ArrayList<>();
         while (rs.next()) {
-            categories.add(rs.getString(1));
+//            can also be extract category
+            categories.add(new Category(
+                    rs.getLong("Id"),
+                    rs.getString("category")
+            ));
         }
         return categories;
     }

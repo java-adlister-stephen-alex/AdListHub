@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface CategoriesAds {
     List<CategoryAd> all();
-    Long insert(long adId, long categoryId);
+    void insert(long adId, long categoryId);
 }

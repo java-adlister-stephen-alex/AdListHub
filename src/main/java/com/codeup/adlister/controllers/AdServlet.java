@@ -3,6 +3,7 @@ package com.codeup.adlister.controllers;
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.dao.MySQLAdsDao;
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.Category;
 import com.codeup.adlister.models.User;
 
 import javax.servlet.ServletException;
@@ -31,29 +32,33 @@ public class AdServlet extends HttpServlet {
 //            request.getRequestDispatcher("/WEB-INF/ads/ad.jsp").forward(request, response);
 //            return;
 //        }
-//        if(request.getParameter("delete") != null){
-//            request.setAttribute("delete", true);
-//            request.getRequestDispatcher("/WEB-INF/ads/ad.jsp").forward(request, response);
-//            return;
-//        }
-        if(request.getParameter("deletefinal") != null){
-            DaoFactory.getAdsDao().deleteById(request.getParameter("ad_card"));
-            request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
+        if(request.getParameter("delete") != null){
+            request.setAttribute("delete", true);
+            request.getRequestDispatcher("/WEB-INF/ads/ad.jsp").forward(request, response);
             return;
         }
+        if(request.getParameter("deletefinal") != null){
+            DaoFactory.getAdsDao().deleteById(request.getParameter("ad_card"));
+            request.getRequestDispatcher("/profile").forward(request, response);
+            return;
+        }
+        List<Category> categories;
         String id = request.getParameter("ad_card");
+        Long newId = parseLong(id);
+        categories = DaoFactory.getAdsDao().getCategoriesForAd(newId);
+        request.getSession().setAttribute("adCategories", categories);
         request.getSession().setAttribute("ad_id", id);
         List<Ad> ad;
-        if(request.getParameter("edit") != null){
-
-        }
+//        if(request.getParameter("edit") != null){
+//
+//        }
         ad = DaoFactory.getAdsDao().findById(id);
         request.setAttribute("ad", ad);
         request.getRequestDispatcher("/WEB-INF/ads/ad.jsp").forward(request, response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String description = request.getParameter("edit-description").trim();
-        String price = request.getParameter("edit-price").trim();
+        String description = request.getParameter("edit-description");
+        String price = request.getParameter("edit-price");
         long priceLong;
         String id = (String)request.getSession().getAttribute("ad_id");
         try {
@@ -63,8 +68,7 @@ public class AdServlet extends HttpServlet {
             response.sendRedirect("/ads/card?ad_card=" + id);
             return;
         }
-        String title = (request.getParameter("edit-title")).trim();
-        System.out.println(title + description + priceLong + id);
+        String title = (request.getParameter("edit-title"));
         DaoFactory.getAdsDao().patchById(id, title, description, priceLong);
         request.getSession().removeAttribute("ad_id");
         response.sendRedirect("/ads/card?ad_card=" + id);

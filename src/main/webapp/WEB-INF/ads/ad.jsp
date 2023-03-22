@@ -38,6 +38,16 @@
                             <textarea id="edit-description" name="edit-description"  disabled>
                                 ${ad.get(0).description}
                             </textarea>
+                            <c:choose>
+                                <c:when test="${adCategories.size() != 0}">
+                                    <div>
+                                        Categories:
+                                        <c:forEach var="category" items="${adCategories}">
+                                            <span>${category.category} </span>
+                                        </c:forEach>
+                                    </div>
+                                </c:when>
+                            </c:choose>
                         </div>
                     </div>
                     <c:choose>
@@ -51,9 +61,9 @@
                             <button id="confirm-edit-btn" class="d-none btn btn-outline-success" type="submit">
                                 Save Changes
                             </button>
-                            <button id="delete-btn" class="btn btn-outline-danger" href="/ads/card?ad_card=${param.ad_card}&delete=true">
+                            <a id="delete-btn" class="btn btn-outline-danger" href="/ads/card?ad_card=${param.ad_card}&delete=true">
                                 Delete
-                            </button>
+                            </a>
                         </c:when>
                     </c:choose>
                     </form>
