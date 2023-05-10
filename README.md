@@ -4,19 +4,19 @@ This project provides a functional and user-friendly platform for posting and br
 The platform is built using HTML, CSS, JavaScript, Spring, MySQL, and jQuery.
 
 ## Features
-*User registration and login system
-*User profile pages
-*Advertisements posting and browsing system
-*Search functionality
-*Advertisements categories system
+* User registration and login system
+* User profile pages
+* Advertisements posting and browsing system
+* Search functionality
+* Advertisements categories system
 
 ## Languages
-*HTML
-*CSS
-*JavaScript
-*Spring
-*MySQL
-*jQuery
+* HTML
+* CSS
+* JavaScript
+* Spring
+* MySQL
+* jQuery
 
 ## Installation
 
